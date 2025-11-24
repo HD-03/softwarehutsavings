@@ -16,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <script type="text/javascript" src="https://s.skimresources.com/js/294950X1782259.skimlinks.js"></script>
       </body>
     </html>
   );
