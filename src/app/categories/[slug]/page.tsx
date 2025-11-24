@@ -1,42 +1,31 @@
 import { notFound } from "next/navigation";
+import { categories } from "@/data/categories";
+import { tools } from "@/data/tools";
 
-const categories: Record<string, string[]> = {
-  "ai-tools": ["Jasper", "Notion AI", "Copy.ai"],
-  "developer-tools": ["GitHub Copilot", "JetBrains", "Postman"],
-  "marketing-seo": ["Ahrefs", "Semrush", "Mailchimp"],
-  "productivity": ["Notion", "Todoist", "Trello"],
-  "security-vpn": ["NordVPN", "ExpressVPN"],
-  "hosting-domains": ["Bluehost", "Namecheap", "HostGator"],
-};
+export default async function CategoryPage({ params }: any) {
+  // NEXT.JS 16 REQUIREMENT: params is now a Promise
+  const { slug } = await params;
 
-export default function CategoryPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const slug = params.slug;
+  const category = categories.find((c) => c.slug === slug);
+  if (!category) return notFound();
 
-  const tools = categories[slug];
-  if (!tools) return notFound();
-
-  const title = slug.replace(/-/g, " ").toUpperCase();
+  const toolsInCategory = tools.filter(
+    (t) => t.category === category.slug
+  );
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">{title}</h1>
+      <h1 className="text-3xl font-bold mb-6">{category.name}</h1>
 
-      <ul className="space-y-4">
-        {tools.map((tool) => {
-          const toolSlug = tool.toLowerCase().replace(/\s+/g, "-");
-          return (
-            <li key={tool}>
-              <a href={`/tools/${toolSlug}`} className="text-xl hover:underline">
-                {tool}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+      {toolsInCategory.map((tool) => (
+        <a
+          key={tool.slug}
+          href={`/tools/${tool.slug}`}
+          className="block text-xl hover:underline mb-4"
+        >
+          {tool.name}
+        </a>
+      ))}
     </div>
   );
 }

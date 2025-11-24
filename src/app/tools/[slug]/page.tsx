@@ -36,12 +36,13 @@ const tools: Record<string, Tool> = {
 
 type ToolSlug = keyof typeof tools;
 
-export default function ToolPage({ params }: { params: { slug: string } }) {
-  const slug = params.slug as ToolSlug;
+export default async function ToolPage({ params }: { params: { slug: string } }) {
+  // MUST AWAIT params in Next.js 16
+  const { slug } = await params;
 
   if (!(slug in tools)) return notFound();
 
-  const tool = tools[slug];
+  const tool = tools[slug as ToolSlug];
 
   return (
     <div>
