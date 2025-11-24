@@ -1,15 +1,4 @@
-type Tool = {
-  name: string;
-  slug: string;
-};
-
-const tools: Tool[] = [
-  { name: "Jasper", slug: "jasper" },
-  { name: "Notion AI", slug: "notion-ai" },
-  { name: "Copy.ai", slug: "copy-ai" },
-  { name: "NordVPN", slug: "nordvpn" },
-  { name: "Bluehost", slug: "bluehost" },
-];
+import { tools } from "@/data/tools";
 
 export default function ToolsPage() {
   return (

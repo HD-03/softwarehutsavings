@@ -1,48 +1,12 @@
 import { notFound } from "next/navigation";
+import { tools } from "@/data/tools";
 
-type Tool = {
-  name: string;
-  description: string;
-  website: string;
-};
-
-const tools: Record<string, Tool> = {
-  jasper: {
-    name: "Jasper",
-    description: "AI writing assistant for content creators.",
-    website: "https://jasper.ai",
-  },
-  "notion-ai": {
-    name: "Notion AI",
-    description: "AI-powered productivity and documentation tool.",
-    website: "https://notion.so",
-  },
-  "copy-ai": {
-    name: "Copy.ai",
-    description: "AI content generation platform.",
-    website: "https://copy.ai",
-  },
-  nordvpn: {
-    name: "NordVPN",
-    description: "Secure VPN service with fast global servers.",
-    website: "https://nordvpn.com",
-  },
-  bluehost: {
-    name: "Bluehost",
-    description: "Popular website hosting provider.",
-    website: "https://bluehost.com",
-  },
-} as const;
-
-type ToolSlug = keyof typeof tools;
-
-export default async function ToolPage({ params }: { params: { slug: string } }) {
-  // MUST AWAIT params in Next.js 16
+export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  if (!(slug in tools)) return notFound();
+  const tool = tools.find((t) => t.slug === slug);
 
-  const tool = tools[slug as ToolSlug];
+  if (!tool) return notFound();
 
   return (
     <div>

@@ -2,12 +2,25 @@ export const categories = [
   {
     slug: "ai-tools",
     name: "AI Tools",
-    tools: ["jasper", "notion-ai", "copy-ai"],
   },
   {
     slug: "developer-tools",
     name: "Developer Tools",
-    tools: ["github-copilot", "jetbrains", "postman"],
   },
-  // Add more categories here
+  {
+    slug: "marketing-seo",
+    name: "Marketing & SEO",
+  },
+  {
+    slug: "productivity",
+    name: "Productivity",
+  },
+  {
+    slug: "security-vpn",
+    name: "Security & VPN",
+  },
+  {
+    slug: "hosting-domains",
+    name: "Hosting & Domains",
+  },
 ];
