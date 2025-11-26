@@ -1,5 +1,3 @@
-// src/app/categories/page.tsx
-
 export default function CategoriesPage() {
   const categories = [
     { name: "AI Tools", slug: "ai-tools" },
@@ -11,17 +9,27 @@ export default function CategoriesPage() {
   ];
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">Categories</h1>
+    <div className="space-y-10">
+      <h1 className="text-3xl font-bold" style={{ color: "var(--foreground)" }}>
+        Categories
+      </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {categories.map((cat) => (
           <a
-            href={`/categories/${cat.slug}`}
             key={cat.slug}
-            className="p-6 bg-neutral-900 rounded-lg border border-neutral-700 hover:border-white transition"
+            href={`/categories/${cat.slug}`}
+            className="p-6 rounded-lg border hover-card"
+            style={{
+              background: "var(--card-bg)",
+              borderColor: "var(--card-border)",
+              color: "var(--foreground)",
+            }}
           >
-            <h2 className="text-xl font-semibold">{cat.name}</h2>
+            <h2 className="text-xl font-semibold mb-1">{cat.name}</h2>
+            <p style={{ color: "var(--muted)" }}>
+              Explore deals on {cat.name}
+            </p>
           </a>
         ))}
       </div>

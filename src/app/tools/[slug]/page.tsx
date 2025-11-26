@@ -1,22 +1,55 @@
 import { notFound } from "next/navigation";
-import { tools } from "@/data/tools";
 
-export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {
+const tools: any = {
+  jasper: {
+    name: "Jasper",
+    description: "AI writing assistant for content creators.",
+    website: "https://jasper.ai",
+  },
+  "notion-ai": {
+    name: "Notion AI",
+    description: "AI-powered productivity and documentation tool.",
+    website: "https://notion.so",
+  },
+  "copy-ai": {
+    name: "Copy.ai",
+    description: "AI content generation platform.",
+    website: "https://copy.ai",
+  },
+  nordvpn: {
+    name: "NordVPN",
+    description: "Secure VPN service with fast global servers.",
+    website: "https://nordvpn.com",
+  },
+  bluehost: {
+    name: "Bluehost",
+    description: "Popular website hosting provider.",
+    website: "https://bluehost.com",
+  },
+};
+
+export default async function ToolPage({ params }: any) {
   const { slug } = await params;
 
-  const tool = tools.find((t) => t.slug === slug);
-
-  if (!tool) return notFound();
+  if (!tools[slug]) return notFound();
+  const tool = tools[slug];
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">{tool.name}</h1>
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold" style={{ color: "var(--foreground)" }}>
+        {tool.name}
+      </h1>
 
-      <p className="text-neutral-300 mb-6">{tool.description}</p>
+      <p style={{ color: "var(--muted)" }}>{tool.description}</p>
 
       <a
         href={tool.website}
-        className="px-6 py-3 bg-white text-black rounded-lg font-semibold hover:bg-neutral-300 transition"
+        className="px-6 py-3 rounded-lg font-semibold border hover-accent inline-block"
+        style={{
+          background: "var(--accent)",
+          borderColor: "var(--card-border)",
+          color: "var(--foreground)",
+        }}
       >
         Visit Website
       </a>

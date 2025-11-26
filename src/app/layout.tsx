@@ -4,19 +4,22 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "SoftwareHutSavings",
-  description: "Save money on the best software tools and SaaS programs.",
+  description: "Find deals on software tools and SaaS products.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="bg-black text-white min-h-screen flex flex-col">
+    <html lang="en" data-theme="light">
+      <body>
         <Header />
-        <main className="flex-grow max-w-5xl mx-auto w-full px-4 py-8">
-          {children}
-        </main>
+        <main className="max-w-5xl mx-auto px-4 py-10">{children}</main>
         <Footer />
-        <script type="text/javascript" src="https://s.skimresources.com/js/294950X1782259.skimlinks.js"></script>
+
+        {/* Skimlinks Script */}
+        <script
+          type="text/javascript"
+          src="https://s.skimresources.com/js/YOUR_PUBLISHER_SCRIPT.js"
+        ></script>
       </body>
     </html>
   );
